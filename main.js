@@ -1,3 +1,6 @@
+/**
+ * The only function to trigger to process crunchbase email alerts and put relevent data to the spreadsheet.
+ */
 function main() {
     // Instantiate objects
     const labelName = globalVariables()["MAIL"]["label"];
