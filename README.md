@@ -32,7 +32,7 @@ This file contains a single "encapsulating" function. This is **the function to 
 
 ## Pre-Requisites
 
-1. You have a Crunchbase Starter license.
+1. You have a **Crunchbase Pro** license.
 2. You installed [@google/clasp](https://github.com/google/clasp/) and know how to use it in your CLI.
 3. You're following [this tutorial](https://spiral-sturgeon-359.notion.site/Tutorial-69fba4bdc05b4b4ea769f779938023fe).
 
