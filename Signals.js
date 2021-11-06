@@ -7,6 +7,33 @@ function Signals() {
       "eventDescriptionColumn": 3,
       "eventUrlColumn": 2
     };
+
+    /**
+     * A function that better segments the info on a given fundraising. We split the event full description to extract the type of series and the name of the company that raised funds.
+     * @param {Array} fundRaising the array that contains the data extracted on a fund raising event hitherto
+     * @returns {Array} the same array but the event description's been replaced by a column on the series (magnitude of the fund raising) and the company that proceeded to the fundraising.
+     * 
+     * _splitAcquisitionEventDescription(["stuff", "Series C - Payfit on Les Echos", "other stuff"])
+     * // => ["stuff", "other stuff", "PayFit", "Series C"];
+     */
+    function _splitAcquisitionEventDescription(fundRaising){
+      const eventDescColumn = localVariables["eventDescriptionColumn"];
+      const fullDescription = fundRaising[eventDescColumn];
+      const parts = fullDescription.split(" - ");
+      const series = parts[0];
+      const company = parts[1].split(" on ")[0];
+
+      let res = [];
+      fundRaising.forEach((elem, index) => {
+        if(index !== eventDescColumn){
+          res.push(elem);
+        }
+      });
+
+      fundRaising.concat([company, series]);
+
+      return fundRaising;
+    }
   
     /**
      * A function that classify events extracted from the email either as fund raisings or acquisitions, the only to events we're interested in.
