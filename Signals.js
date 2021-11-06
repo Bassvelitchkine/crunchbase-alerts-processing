@@ -11,29 +11,38 @@ function Signals() {
     /**
      * A function that better segments the info on a given fundraising. We split the event full description to extract the type of series and the name of the company that raised funds.
      * @param {Array} fundRaising the array that contains the data extracted on a fund raising event hitherto
-     * @returns {Array} the same array but the event description's been replaced by a column on the series (magnitude of the fund raising) and the company that proceeded to the fundraising.
+     * @returns {Array} the same array but with a column on the series (magnitude of the fund raising) and the company that proceeded to the fundraising.
      * 
-     * _splitAcquisitionEventDescription(["stuff", "Series C - Payfit on Les Echos", "other stuff"])
-     * // => ["stuff", "other stuff", "PayFit", "Series C"];
+     * _splitFundRaisingEventDescription(["stuff", "Series C - Payfit on Les Echos", "other stuff"])
+     * // => ["stuff", "Series C - Payfit on Les Echos", "other stuff", "PayFit", "Series C"];
      */
-    function _splitAcquisitionEventDescription(fundRaising){
+    function _splitFundRaisingEventDescription(fundRaising){
       const eventDescColumn = localVariables["eventDescriptionColumn"];
       const fullDescription = fundRaising[eventDescColumn];
       const parts = fullDescription.split(" - ");
       const series = parts[0];
       const company = parts[1].split(" on ")[0];
-
-      let res = [];
-      fundRaising.forEach((elem, index) => {
-        if(index !== eventDescColumn){
-          res.push(elem);
-        }
-      });
-
       fundRaising.concat([company, series]);
-
       return fundRaising;
     }
+
+    /**
+     * A function that better segments the info on a given acquisition. We split the event full description to extract the names of the acquired and acquiring companies.
+     * @param {Array} acquisition the array that contains the data extracted on an acquisition event hitherto
+     * @returns {Array} the same array but with a column on acquired company and another on the acquiring one.
+     * 
+     * _splitAcquisitionEventDescription(["stuff", "Amazon acquired by Google on The NYT", "other stuff"])
+     * // => ["stuff", "Amazon acquired by Google on The NYT", "other stuff", "Amazon", "Google];
+     */
+     function _splitAcquisitionEventDescription(acquisition){
+      const eventDescColumn = localVariables["eventDescriptionColumn"];
+      const fullDescription = acquisition[eventDescColumn];
+      const parts = fullDescription.split(" acquired by ");
+      const acquiredCompany = parts[0];
+      const acquiringCompany = parts[1].split(" on ")[0];
+      acquisition.concat([acquiredCompany, acquiringCompany]);
+      return acquisition;
+    };
   
     /**
      * A function that classify events extracted from the email either as fund raisings or acquisitions, the only to events we're interested in.
