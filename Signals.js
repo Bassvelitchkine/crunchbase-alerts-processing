@@ -90,7 +90,7 @@ function Signals() {
      * @returns {Object} an object that contains dated fund raising events on the one hand and dated acquisition events on the other. See example.
      * 
      * _computeSignals([["https://crunchbase.search.url", "https://crunchbase.event.url", "Event Description of a Series C fundraising"], ["https://crunchbase.search.url", "https://crunchbase.event.url", "Event Description of company A acquired by company B"], ...])
-     * // => {"fundRaisings": [["30/10/2021", "https://crunchbase.search.url", "https://crunchbase.event.url", "Event Description of a Series C fundraising"], ...], "acquisitions": [["11/10/2021", "https://crunchbase.search.url", "https://crunchbase.event.url", "Event Description of company A acquired by company B"], ...]};
+     * // => {"fundRaisings": [["30/10/2021", "https://crunchbase.search.url", "https://crunchbase.event.url", "Series C - Company on Newspaper", "Company", "Series C"], ...], "acquisitions": [["11/10/2021", "https://crunchbase.search.url", "https://crunchbase.event.url", "Company A acquired by Company B on newspaper", "Company A", "Company B"], ...]};
      */
     function _computeSignals(processedEmails){
       var temp = [];
