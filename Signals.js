@@ -22,8 +22,7 @@ function Signals() {
       const parts = fullDescription.split(" - ");
       const series = parts[0];
       const company = parts[1].split(" on ")[0];
-      fundRaising.concat([company, series]);
-      return fundRaising;
+      return fundRaising.concat([company, series]);
     }
 
     /**
@@ -40,8 +39,7 @@ function Signals() {
       const parts = fullDescription.split(" acquired by ");
       const acquiredCompany = parts[0];
       const acquiringCompany = parts[1].split(" on ")[0];
-      acquisition.concat([acquiredCompany, acquiringCompany]);
-      return acquisition;
+      return acquisition.concat([acquiredCompany, acquiringCompany]);
     };
   
     /**
@@ -65,7 +63,7 @@ function Signals() {
       });
 
       acquisitions = acquisitions.map(acquisition => _splitAcquisitionEventDescription(acquisition));
-      fundRaisings = fundRaisings.map(fundRaising => _splitfundRaisingEventDescription(fundRaising));
+      fundRaisings = fundRaisings.map(fundRaising => _splitFundRaisingEventDescription(fundRaising));
   
       return {
         acquisitions,
