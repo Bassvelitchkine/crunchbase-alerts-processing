@@ -49,8 +49,8 @@ function Signals() {
      * @param {Array} eventsList the list of events to classify
      * @returns {Object} an object that contains events classified either as fund raisings or as acquisitions.
      * 
-     * _classifyEvents([["30/10/2021", "https://crunchbase.search.url", "https://crunchbase.event.url", "Event Description of a Series C fundraising"], ["11/10/2021", "https://crunchbase.search.url", "https://crunchbase.event.url", "Event Description of company A acquired by company B"], ...])
-     * // => {"fundRaisings": [["30/10/2021", "https://crunchbase.search.url", "https://crunchbase.event.url", "Event Description of a Series C fundraising"], ...], "acquisitions": [["11/10/2021", "https://crunchbase.search.url", "https://crunchbase.event.url", "Event Description of company A acquired by company B"], ...]};
+     * _classifyEvents([["30/10/2021", "https://crunchbase.search.url", "https://crunchbase.event.url", "Series C - Company on Newspaper"], ["11/10/2021", "https://crunchbase.search.url", "https://crunchbase.event.url", "Company A acquired by Company B on newspaper"], ...])
+     * // => {"fundRaisings": [["30/10/2021", "https://crunchbase.search.url", "https://crunchbase.event.url", "Series C - Company on Newspaper", "Company", "Series C"], ...], "acquisitions": [["11/10/2021", "https://crunchbase.search.url", "https://crunchbase.event.url", "Company A acquired by Company B on newspaper", "Company A", "Company B"], ...]};
      */
     function _classifyEvents(eventsList){
       let acquisitions = [];
@@ -63,6 +63,9 @@ function Signals() {
           fundRaisings.push(event);
         }
       });
+
+      acquisitions = acquisitions.map(acquisition => _splitAcquisitionEventDescription(acquisition));
+      fundRaisings = fundRaisings.map(fundRaising => _splitfundRaisingEventDescription(fundRaising));
   
       return {
         acquisitions,
